@@ -4,14 +4,18 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 0 40px;
+    width: 260px;
+    margin-right: 140px;
     font-family: $font-rubik;
     cursor: default;
+    transition: all .2s ease-in-out;
 
     > span {
+        width: 82px;
         font-size: 6rem;
         line-height: 6rem;
         margin-right: 8px;
+        transition: all .2s ease-in-out;
     }
 
     > div {
@@ -19,5 +23,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
+    }
+
+    &:hover {
+        letter-spacing: 4px;
+
+        > span {
+            color: #3e3852;
+            text-shadow: 3px 1px #fff;
+        }
     }
 }

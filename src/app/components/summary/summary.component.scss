@@ -1,0 +1,46 @@
+@import 'variables';
+
+.summary-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.summary {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: right;
+
+    li {
+        margin-right: 40px;
+
+        h6 {
+            color: rgba(255,255,255, .5);
+            font-size: .9rem;
+            margin-bottom: 4px;
+        }
+
+        p {
+            font-size: 1.4rem;
+
+        }
+
+    }
+}
+
+.fiat-currencies {
+    margin-left: 20px;
+    color: rgba(255,255,255, .5);
+    text-align: right;
+
+    li {
+
+        span {
+            display: inline-block;
+            width: 40px;
+            color: $color-text;
+        }
+
+    }
+}

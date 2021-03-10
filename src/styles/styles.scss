@@ -1,6 +1,10 @@
 @import 'reset';
 @import 'variables';
 
+* {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;
@@ -16,4 +20,15 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.4;
+}
+
+.text-left { text-align: left }
+.text-center { text-align: center }
+.text-right { text-align: right }
+
+.text-green { color: #7de604 }
+.text-red { color: #f3335f }
+
+.h2 {
+    margin-bottom: 20px;
 }
