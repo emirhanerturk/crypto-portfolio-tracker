@@ -1,0 +1,19 @@
+@import 'reset';
+@import 'variables';
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    background: rgb(62,56,82);
+    background: linear-gradient(to left top, #111e40 0%, #3e3852 100%);
+    color: $color-text;
+    font-family: $font-alata;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}

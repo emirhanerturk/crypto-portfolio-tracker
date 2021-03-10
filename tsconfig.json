@@ -15,6 +15,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@decorators/*": ["src/app//decorators/*"],
+      "@enums/*": ["src/app/enums/*"],
+      "@interfaces/*": ["src/app/interfaces/*"],
+      "@pipes/*": ["src/app/pipes/*"],
+      "@services/*": ["src/app/services/*"],
+      "@stores/*": ["src/app/stores/*"],
+      "@helpers/*": ["src/app/helpers/*"],
+    }
   }
 }
