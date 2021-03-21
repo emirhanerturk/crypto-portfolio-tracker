@@ -1,3 +1,4 @@
+@import 'variables';
 
 .table-balance {
     width: 100%;
@@ -16,6 +17,7 @@
         tr {
 
             td {
+                vertical-align: middle;
                 padding: 16px 32px;
                 background-color: rgba(255,255,255, .06);
         
@@ -31,6 +33,26 @@
             }
 
         }
+    }
+
+    .crypto-info {
+        @include flex-start;
+
+        img {
+            margin-right: 8px;
+        }
+
+        div {
+            @include flex-start;
+            flex-direction: column;
+
+            small {
+                font-size: 12px;
+                color: rgba(255, 255, 255, 0.4);
+            }
+
+        }
+
     }
 
 }
