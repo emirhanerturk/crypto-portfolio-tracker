@@ -20,10 +20,13 @@
       "@decorators/*": ["src/app//decorators/*"],
       "@enums/*": ["src/app/enums/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
+      "@models/*": ["src/app/models/*"],
       "@pipes/*": ["src/app/pipes/*"],
       "@services/*": ["src/app/services/*"],
       "@stores/*": ["src/app/stores/*"],
       "@helpers/*": ["src/app/helpers/*"],
+      "@interceptors/*": ["src/app/interceptors/*"],
+      "@env/*": ["src/environments/*"],
     }
   }
 }

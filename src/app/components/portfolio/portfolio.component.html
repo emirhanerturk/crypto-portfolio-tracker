@@ -1,0 +1,87 @@
+<h2 class="h2">
+    Portfolio
+    <small>
+        Last Updated:
+        <ng-container *ngIf="lastUpdatedDate">
+            {{ timeFromLastUpdated | async }} ({{ lastUpdatedDate.format('HH:mm') }})
+        </ng-container>
+        <ng-container *ngIf="!lastUpdatedDate">
+            -
+        </ng-container>
+    </small>
+</h2>
+
+<table class="table-balance">
+    <thead>
+        <tr>
+            <th class="text-left">Coin</th>
+            <th>Asset</th>
+            <th>Holdings</th>
+            <th>Unit Cost</th>
+            <th>Last Price</th>
+            <th>24h Change</th>
+            <th>Change</th>
+            <th>Profit/Loss</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="portfolios">
+        <tr *ngFor="let portfolio of portfolios">
+            <td class="text-left">
+                <a [href]="'https://www.binance.com/en/trade/' + portfolio.coin.symbol.toUpperCase() + '_USDT'"
+                    class="crypto-info" target="_blank">
+                    <img [src]="'/assets/crypto-icons/' + portfolio.coin.symbol + '.svg'" alt="">
+                    <div>
+                        <h6>{{ portfolio.coin.symbol }}</h6>
+                        <small>{{ portfolio.coin.name }}</small>
+                    </div>
+                </a>
+            </td>
+            <td>
+                {{ portfolio.assets }}
+            </td>
+            <td>
+                <small class="currency">$</small>{{ portfolio.holdings?.toFixed(2) || '-' }}
+            </td>
+            <td>
+                <small class="currency">$</small>{{ portfolio.avgUnitCost }}
+            </td>
+            <td>
+                <ng-container *ngIf="!!prices">
+                    <small class="currency">$</small>{{ prices[portfolio.coin.symbol]?.price || '-' }}
+                </ng-container>
+                <ng-container *ngIf="!prices">
+                    -
+                </ng-container>
+            </td>
+            <td>
+                <ng-container *ngIf="!!prices">
+                    <span [class.text-green]="prices[portfolio.coin.symbol]?.isPositiveChange" [class.text-red]="prices[portfolio.coin.symbol]?.isNegativeChange">
+                        {{ prices[portfolio.coin.symbol]?.change24h.toFixed(2) || '-' }}%
+                    </span>
+                </ng-container>
+                <ng-container *ngIf="!prices">
+                    -
+                </ng-container>
+            </td>
+            <td>
+                <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
+                    {{ portfolio.change?.toFixed(2) || '-' }}%
+                </span>
+            </td>
+            <td>
+                <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
+                    ${{ portfolio.profitOrLoss?.toFixed(2) || '-' }}
+                </span>
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="!portfolios">
+        <tr>
+            <td colspan="8" class="text-center">
+                Loading...
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 class="h2">Archived</h2>

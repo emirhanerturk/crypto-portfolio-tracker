@@ -1,39 +1,42 @@
 
 <div class="summary-container">
 
-
-    <ul class="summary">
+    <ul *ngIf="balance" class="summary">
         <li>
             <h6>Balance</h6>
-            <p>$80,233</p>
+            <p><small class="currency">$</small>{{ balance.balance?.toFixed(2) || '-' }}</p>
         </li>
         <li>
             <h6>Balance (TRY)</h6>
-            <p>₺390,233</p>
+            <p>-</p>
         </li>
         <li>
             <h6>Change</h6>
-            <p class="text-green">%12,2</p>
+            <p [class.text-green]="balance.isPositiveChange" [class.text-red]="balance.isNegativeChange">
+                {{ balance.change?.toFixed(2) || '-' }}%
+            </p>
         </li>
         <li>
             <h6>Profit/Loss</h6>
-            <p class="text-green">$8,453</p>
+            <p [class.text-green]="balance.isPositiveChange" [class.text-red]="balance.isNegativeChange">
+                <small class="currency">$</small>{{ balance.profitOrLoss?.toFixed(2) || '-' }}
+            </p>
         </li>
         <li>
             <h6>Profit/Loss (TRY)</h6>
-            <p class="text-green">₺90,453</p>
+            <p>-</p>
         </li>
     </ul>
-    
+
     <ul class="fiat-currencies">
         <li>
             $ USD
-            <span>7.54</span>
+            <span>8.14</span>
         </li>
         <li>
             € EUR
-            <span>8.98</span>
+            <span>9.71</span>
         </li>
-    </ul>    
+    </ul>
 
 </div>

@@ -1,0 +1,6 @@
+<p>transactions works!</p>
+
+
+<select name="">
+  <option *ngFor="let coin of coins | async" [value]="coin.symbol">{{ coin.name }}</option>
+</select>

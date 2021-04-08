@@ -1,5 +1,5 @@
-@import 'reset';
-@import 'variables';
+@import "reset";
+@import "variables";
 
 * {
     box-sizing: border-box;
@@ -13,7 +13,7 @@ html {
 }
 
 body {
-    background: rgb(62,56,82);
+    background: rgb(62, 56, 82);
     background: linear-gradient(to left top, #111e40 0%, #3e3852 100%);
     color: $color-text;
     font-family: $font-alata;
@@ -22,13 +22,39 @@ body {
     line-height: 1.4;
 }
 
-.text-left { text-align: left }
-.text-center { text-align: center }
-.text-right { text-align: right }
+.text-left {
+    text-align: left;
+}
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
 
-.text-green { color: #7de604 }
-.text-red { color: #f3335f }
+.text-green {
+    color: #2cbf32;
+}
+.text-red {
+    color: #e91e63;
+}
+
+.text-muted {
+    color: rgba(255, 255, 255, .4);
+}
 
 .h2 {
     margin-bottom: 20px;
+    font-size: 18px;
+
+    small {
+        margin-left: 10px;
+        color: rgba(255, 255, 255, .4);
+        font-size: 13px;
+    }
+}
+
+a, a:hover {
+    color: inherit;
+    text-decoration: none;
 }
