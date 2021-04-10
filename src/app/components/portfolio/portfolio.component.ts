@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import * as _ from "lodash";
 import * as dayjs from 'dayjs';
 import * as relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
@@ -22,6 +23,14 @@ export class PortfolioComponent implements OnInit {
   lastUpdatedDate: dayjs.Dayjs;
   timeFromLastUpdated: Observable<string>;
 
+  sorting: {
+    by: ''|'coin.symbol'|'avgUnitCost'|'assets'|'change'|'profitOrLoss'|'holdings',
+    type: boolean
+  } = {
+    by: '',
+    type: true
+  };
+
   constructor(
     private portfolioStore: PortfolioStore,
     private pricesStore: PricesStore
@@ -30,7 +39,9 @@ export class PortfolioComponent implements OnInit {
   ngOnInit(): void {
 
     this.portfolioStore.portfolioHasAssets$.subscribe(data => {
+      let first = !this.portfolios;
       this.portfolios = data;
+      if (first) this.sort('coin.symbol');
     });
 
     this.pricesStore.pricesObject$.subscribe(data => {
@@ -45,6 +56,26 @@ export class PortfolioComponent implements OnInit {
       map(() => this.lastUpdatedDate ? this.lastUpdatedDate.fromNow() : '-'),
       distinctUntilChanged()
     );
+
+  }
+
+  sort(sortBy: 'coin.symbol'|'assets'|'avgUnitCost'|'change'|'profitOrLoss'|'holdings'): void {
+
+    if (sortBy === this.sorting.by){
+      this.sorting.type = !this.sorting.type;
+    }
+
+    this.sorting.by = sortBy;
+
+    this.portfolios.sort((a, b) => {
+      if (_.get(a, sortBy) > _.get(b, sortBy)) return 1;
+      if (_.get(a, sortBy) < _.get(b, sortBy)) return -1;
+      return 0
+    });
+
+    if (!this.sorting.type){
+      this.portfolios.reverse();
+    }
 
   }
 

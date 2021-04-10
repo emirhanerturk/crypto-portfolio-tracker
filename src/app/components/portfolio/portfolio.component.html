@@ -14,14 +14,32 @@
 <table class="table-balance">
     <thead>
         <tr>
-            <th class="text-left">Coin</th>
-            <th>Asset</th>
-            <th>Holdings</th>
-            <th>Unit Cost</th>
+            <th class="sortable text-left" (click)="sort('coin.symbol')">
+                Coin
+                <img *ngIf="sorting.by === 'coin.symbol'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
+            <th class="sortable" (click)="sort('assets')">
+                Asset
+                <img *ngIf="sorting.by === 'assets'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
+            <th class="sortable" (click)="sort('avgUnitCost')">
+                Unit Cost
+                <img *ngIf="sorting.by === 'avgUnitCost'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
             <th>Last Price</th>
             <th>24h Change</th>
-            <th>Change</th>
-            <th>Profit/Loss</th>
+            <th class="sortable" (click)="sort('change')">
+                Change
+                <img *ngIf="sorting.by === 'change'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
+            <th class="sortable" (click)="sort('profitOrLoss')">
+                Profit/Loss
+                <img *ngIf="sorting.by === 'profitOrLoss'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
+            <th class="sortable" (click)="sort('holdings')">
+                Holdings
+                <img *ngIf="sorting.by === 'holdings'" [class.reverse]="!sorting.type" src="/assets/icons/down-arrow.svg" alt="">
+            </th>
         </tr>
     </thead>
     <tbody *ngIf="portfolios">
@@ -29,7 +47,7 @@
             <td class="text-left">
                 <a [href]="'https://www.binance.com/en/trade/' + portfolio.coin.symbol.toUpperCase() + '_USDT'"
                     class="crypto-info" target="_blank">
-                    <img [src]="'/assets/crypto-icons/' + portfolio.coin.symbol + '.svg'" alt="">
+                    <img [src]="'/assets/crypto-icons/' + portfolio.coin.symbol + '.svg'" onerror="this.onerror=null;this.src='/assets/crypto-icons/default.png'" alt="">
                     <div>
                         <h6>{{ portfolio.coin.symbol }}</h6>
                         <small>{{ portfolio.coin.name }}</small>
@@ -38,9 +56,6 @@
             </td>
             <td>
                 {{ portfolio.assets }}
-            </td>
-            <td>
-                <small class="currency">$</small>{{ portfolio.holdings?.toFixed(2) || '-' }}
             </td>
             <td>
                 <small class="currency">$</small>{{ portfolio.avgUnitCost }}
@@ -73,6 +88,9 @@
                     ${{ portfolio.profitOrLoss?.toFixed(2) || '-' }}
                 </span>
             </td>
+            <td>
+                <small class="currency">$</small>{{ portfolio.holdings?.toFixed(2) || '-' }}
+            </td>
         </tr>
     </tbody>
     <tbody *ngIf="!portfolios">
@@ -84,4 +102,4 @@
     </tbody>
 </table>
 
-<h2 class="h2">Archived</h2>
+<!-- <h2 class="h2">Archived</h2> -->

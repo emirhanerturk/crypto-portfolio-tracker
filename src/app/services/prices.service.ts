@@ -12,7 +12,7 @@ import { BalanceStore } from '@stores/balance.store';
 export class PricesService {
 
   interval: any;
-  intervalTime = 5 * 60 * 1000; // 5 minutes
+  intervalMinute = 1;
 
   constructor(
     private coinGeckoService: CoinGeckoService,
@@ -64,7 +64,7 @@ export class PricesService {
     this.setPrices();
     this.interval = setInterval(() => {
       this.setPrices();
-    }, this.intervalTime)
+    }, this.intervalMinute * 60 * 1000)
 
   }
 
@@ -76,8 +76,8 @@ export class PricesService {
 
   }
 
-  setIntervalTime(ms: number): void {
-    this.intervalTime = ms;
+  setIntervalMinute(min: number): void {
+    this.intervalMinute = min;
   }
 
 }
