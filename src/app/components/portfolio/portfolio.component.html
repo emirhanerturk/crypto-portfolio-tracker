@@ -1,6 +1,6 @@
 <h2 class="h2">
     Portfolio
-    <small>
+    <small *ngIf="portfolios && portfolios.length">
         Last Updated:
         <ng-container *ngIf="lastUpdatedDate">
             {{ timeFromLastUpdated | async }} ({{ lastUpdatedDate.format('HH:mm') }})
