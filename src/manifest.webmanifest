@@ -1,0 +1,23 @@
+{
+  "name": "Crypto Portfolio Tracker",
+  "short_name": "Crypto Portfolio Tracker",
+  "theme_color": "#3e3852",
+  "background_color": "#3e3852",
+  "display": "fullscreen",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}
