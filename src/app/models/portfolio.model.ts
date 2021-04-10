@@ -47,7 +47,7 @@ export class Portfolio extends Deserializable {
   setAssets(): void {
     const buy = _.sumBy(this.transactions.filter(t => t.type === ETransactionType.BUY), 'assets');
     const sell = _.sumBy(this.transactions.filter(t => t.type === ETransactionType.SELL), 'assets');
-    this.assets = Number((buy - sell).toFixed(12));
+    this.assets = Number((buy - sell).toFixed(8));
   }
 
   setAvgUnitCost(): void {
@@ -58,7 +58,7 @@ export class Portfolio extends Deserializable {
         total += current.assets;
         return prev += (current.assets * current.price);
       }, 0);
-    this.avgUnitCost = Number((weighted / total).toFixed(2));
+    this.avgUnitCost = Number((weighted / total).toFixed(8));
   }
 
   get hasAssets(): boolean {
