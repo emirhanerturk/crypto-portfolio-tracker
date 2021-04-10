@@ -7,14 +7,21 @@
             <app-summary></app-summary>
         </div>
     </header>
-    <section class="main-content">
+    <section class="main-content" [class.expand]="expand">
 
-        <section class="portfolio">
+        <section class="portfolio scrollbar">
             <app-portfolio></app-portfolio>
         </section>
 
         <section class="transactions">
-            <app-transactions></app-transactions>
+            <div class="vertical-bar" (click)="expand = !expand">
+                <img src="/assets/icons/down-arrow.svg" alt="">
+                Transactions
+                <img src="/assets/icons/down-arrow.svg" alt="">
+            </div>
+            <div class="transactions-content scrollbar">
+                <app-transactions></app-transactions>
+            </div>
         </section>
 
     </section>

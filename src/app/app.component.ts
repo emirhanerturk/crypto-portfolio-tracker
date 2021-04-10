@@ -8,6 +8,8 @@ import { AppService } from '@services/app.service';
 })
 export class AppComponent {
 
+  expand = false;
+
   constructor(
     private appService: AppService
   ) {

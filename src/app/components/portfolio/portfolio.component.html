@@ -11,7 +11,7 @@
     </small>
 </h2>
 
-<table class="table-balance">
+<table class="table-portfolio">
     <thead>
         <tr>
             <th class="sortable text-left" (click)="sort('coin.symbol')">
@@ -55,41 +55,48 @@
                 </a>
             </td>
             <td>
-                {{ portfolio.assets }}
-            </td>
-            <td>
-                <small class="currency">$</small>{{ portfolio.avgUnitCost }}
-            </td>
-            <td>
-                <ng-container *ngIf="!!prices">
-                    <small class="currency">$</small>{{ prices[portfolio.coin.symbol]?.price || '-' }}
+                <ng-container *ngIf="!masked">
+                    {{ portfolio.assets }}
                 </ng-container>
-                <ng-container *ngIf="!prices">
-                    -
-                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
             </td>
             <td>
-                <ng-container *ngIf="!!prices">
-                    <span [class.text-green]="prices[portfolio.coin.symbol]?.isPositiveChange" [class.text-red]="prices[portfolio.coin.symbol]?.isNegativeChange">
-                        {{ prices[portfolio.coin.symbol]?.change24h.toFixed(2) || '-' }}%
+                <ng-container *ngIf="!masked">
+                    <small class="currency">$</small>{{ portfolio.avgUnitCost }}
+                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
+            </td>
+            <td>
+                <small *ngIf="!!prices" class="currency">$</small>{{ prices[portfolio.coin.symbol]?.price || '-' }}
+                <span *ngIf="!prices">-</span>
+            </td>
+            <td>
+                <span *ngIf="!!prices" [class.text-green]="prices[portfolio.coin.symbol]?.isPositiveChange" [class.text-red]="prices[portfolio.coin.symbol]?.isNegativeChange">
+                    {{ prices[portfolio.coin.symbol]?.change24h.toFixed(2) || '-' }}%
+                </span>
+                <span *ngIf="!prices">-</span>
+            </td>
+            <td>
+                <ng-container *ngIf="!masked">
+                    <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
+                        {{ portfolio.change?.toFixed(2) || '-' }}%
                     </span>
                 </ng-container>
-                <ng-container *ngIf="!prices">
-                    -
+                <ng-container *ngIf="masked">***</ng-container>
+            </td>
+            <td>
+                <ng-container *ngIf="!masked">
+                    <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
+                        ${{ portfolio.profitOrLoss?.toFixed(2) || '-' }}
+                    </span>
                 </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
             </td>
             <td>
-                <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
-                    {{ portfolio.change?.toFixed(2) || '-' }}%
-                </span>
-            </td>
-            <td>
-                <span [class.text-green]="portfolio.isPositiveChange" [class.text-red]="portfolio.isNegativeChange">
-                    ${{ portfolio.profitOrLoss?.toFixed(2) || '-' }}
-                </span>
-            </td>
-            <td>
-                <small class="currency">$</small>{{ portfolio.holdings?.toFixed(2) || '-' }}
+                <ng-container *ngIf="!masked">
+                    <small class="currency">$</small>{{ portfolio.holdings?.toFixed(2) || '-' }}
+                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
             </td>
         </tr>
     </tbody>
@@ -97,6 +104,13 @@
         <tr>
             <td colspan="8" class="text-center">
                 Loading...
+            </td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="portfolios && portfolios.length === 0">
+        <tr>
+            <td colspan="8" class="text-center">
+                You have no asset. You can add a transaction from the right section. -->
             </td>
         </tr>
     </tbody>

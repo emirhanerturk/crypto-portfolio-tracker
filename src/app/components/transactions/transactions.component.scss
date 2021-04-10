@@ -1,0 +1,54 @@
+
+.transactions-tools {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .add-button {
+        flex: 1;
+        padding-right: 15px;
+    }
+
+}
+
+.transaction-create {
+    width: 100%;
+
+    .form-control {
+        margin-bottom: 4px;
+    }
+
+}
+
+.table-transactions {
+    width: 100%;
+    font-size: 13px;
+    color: #ccc;
+
+    thead {
+        th {
+            padding: 8px 6px;
+            color: rgba(255, 255, 255, .4);
+        }
+    }
+
+    tbody {
+
+        tr {
+            transition: all .2s ease-in-out;
+
+            &:nth-child(2n+1){
+                background-color: rgba(255, 255, 255, .06);
+            }
+
+            &:hover {
+                color: #f3f3f5;
+            }
+
+            td {
+                padding: 8px 6px;
+            }
+        }
+    }
+}

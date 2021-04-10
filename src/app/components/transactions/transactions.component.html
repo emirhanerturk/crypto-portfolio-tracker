@@ -1,5 +1,56 @@
 <h2 class="h2">Transactions</h2>
 
-<select style="width: 200px">
-  <option *ngFor="let coin of coins | async" [value]="coin.symbol">{{ coin.name }}</option>
-</select>
+<div class="transactions-tools">
+    <div class="add-button">
+        <button class="btn btn-block" (click)="openedTransationCreate = !openedTransationCreate">
+            + Add Transaction
+        </button>
+    </div>
+    <div>
+        <button class="btn btn-icon">
+            <img src="/assets/icons/settings.svg" alt="">
+        </button>
+    </div>
+</div>
+
+<form (ngSubmit)="createTransaction()" class="transaction-create" [class.d-none]="!openedTransationCreate">
+
+    <select *ngIf="coins" [(ngModel)]="formValues.coinId" name="coinId" class="form-control">
+        <option value="">Select coin...</option>
+        <option *ngFor="let coin of coins" [value]="coin.id">{{ coin.name }}</option>
+    </select>
+
+    <select class="form-control" [(ngModel)]="formValues.type" name="type">
+        <option value="1">Buy</option>
+        <option value="0">Sell</option>
+    </select>
+
+    <input type="text" [(ngModel)]="formValues.amount" name="amount" class="form-control" placeholder="Amount">
+    <input type="text" [(ngModel)]="formValues.price" name="price" class="form-control" placeholder="Price">
+    <button type="submit" class="btn">Add</button>
+</form>
+
+<table class="table-transactions">
+    <thead>
+        <tr>
+            <th class="text-left">Coin</th>
+            <th></th>
+            <th class="text-right">Amount</th>
+            <th class="text-right">Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody *ngIf="transactions">
+        <tr *ngFor="let transaction of transactions">
+            <td class="text-upper">{{ (transaction.id | coin).symbol }}</td>
+            <td [ngClass]="transaction.type === ETransactionType.BUY ? 'text-green' : 'text-red'">
+                {{ transaction.type === ETransactionType.BUY ? 'BUY' : 'SELL' }}
+            </td>
+            <td class="text-right">{{ transaction.assets }}</td>
+            <td class="text-right">{{ transaction.price }}</td>
+            <td class="text-center">
+                <button class="btn btn-sm" (click)="deleteTransaction(transaction.date)" aria-label="Delete" data-balloon-pos="left" data-balloon-length="small">-</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

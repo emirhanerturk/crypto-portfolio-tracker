@@ -15,19 +15,76 @@
 
     .main-content {
         display: flex;
-        padding: 0 20px;
 
         .portfolio {
-            flex: 0 0 80%;
-            max-width: 80%;
-            padding: 20px;
+            width: calc(100% - 40px);
+            max-width: calc(100% - 40px);
+            height: calc(100vh - 120px);
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 20px 40px;
+            transition: all .2s ease-in-out;
         }
 
         .transactions {
-            flex: 0 0 20%;
-            max-width: 20%;
-            padding: 20px;
+            position: relative;
+            width: 40px;
+            height: calc(100vh - 120px);
+            background-color: rgba(0,0,0,.2);
+            transition: all .2s ease-in-out;
+
+            .vertical-bar {
+                position: absolute;
+                left: 0;
+                right: 0;
+                width: 40px;
+                height: 100%;
+                writing-mode: vertical-rl;
+                line-height: 40px;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.4);
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.8);
+                    background-color: rgba(255,255,255,.1);
+                }
+
+                img {
+                    width: 10px;
+                    transition: all .2s ease-in-out;
+                    transform: rotate(90deg);
+                }
+            }
+
+            .transactions-content {
+                display: none;
+            }
         }
+
+        &.expand {
+
+            .portfolio {
+                width: 75%;
+            }
+
+            .transactions {
+                flex: 25%;
+
+                .vertical-bar img {
+                    transform: rotate(-90deg);
+                }
+
+                .transactions-content {
+                    padding: 20px;
+                    padding-left: 60px;
+                    display: block;
+                }
+            }
+        }
+
     }
 
 }

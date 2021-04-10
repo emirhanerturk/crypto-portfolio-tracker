@@ -4,27 +4,30 @@
     <ul *ngIf="balance" class="summary">
         <li>
             <h6>Balance</h6>
-            <p><small class="currency">$</small>{{ balance.balance?.toFixed(2) || '-' }}</p>
-        </li>
-        <li>
-            <h6>Balance (TRY)</h6>
-            <p>-</p>
+            <p>
+                <ng-container *ngIf="!masked">
+                    <small class="currency">$</small>{{ balance.balance?.toFixed(2) || '-' }}
+                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
+            </p>
         </li>
         <li>
             <h6>Change</h6>
             <p [class.text-green]="balance.isPositiveChange" [class.text-red]="balance.isNegativeChange">
-                {{ balance.change?.toFixed(2) || '-' }}%
+                <ng-container *ngIf="!masked">
+                    {{ balance.change?.toFixed(2) || '-' }}%
+                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
             </p>
         </li>
         <li>
             <h6>Profit/Loss</h6>
             <p [class.text-green]="balance.isPositiveChange" [class.text-red]="balance.isNegativeChange">
-                <small class="currency">$</small>{{ balance.profitOrLoss?.toFixed(2) || '-' }}
+                <ng-container *ngIf="!masked">
+                    <small class="currency">$</small>{{ balance.profitOrLoss?.toFixed(2) || '-' }}
+                </ng-container>
+                <ng-container *ngIf="masked">***</ng-container>
             </p>
-        </li>
-        <li>
-            <h6>Profit/Loss (TRY)</h6>
-            <p>-</p>
         </li>
     </ul>
 

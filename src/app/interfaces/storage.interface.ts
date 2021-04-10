@@ -1,6 +1,5 @@
-
 export interface IStorage {
-    created: number;
-    updated?: number;
-    data?: any;
+  created: number;
+  updated?: number;
+  data?: any;
 }

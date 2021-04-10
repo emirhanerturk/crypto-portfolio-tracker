@@ -27,21 +27,27 @@ export class PricesService {
     const coinIds = this.portfolioStore.getCoinIdsByPortfolio();
     if (!coinIds && !coinIds.length) return;
 
-    const res = await this.coinGeckoService.getPrices(coinIds);
+    try {
 
-    const store = Object.keys(res).map(id => {
-      const coin = this.coinsStore.getCoinById(id);
-      return new Price().deserialize({
-        symbol: coin.symbol,
-        price: res[id].usd,
-        change24h: res[id].usd_24h_change
+      const res = await this.coinGeckoService.getPrices(coinIds);
+
+      const store = Object.keys(res).map(id => {
+        const coin = this.coinsStore.getCoinById(id);
+        return new Price().deserialize({
+          symbol: coin.symbol,
+          price: res[id].usd,
+          change24h: res[id].usd_24h_change
+        });
       });
-    });
 
-    this.pricesStore.setPrices(store);
-    this.pricesStore.setLastUpdate(new Date());
+      this.pricesStore.setPrices(store);
+      this.pricesStore.setLastUpdate(new Date());
 
-    this.setStoresByPrices(store);
+      this.setStoresByPrices(store);
+
+    } catch (error) {
+      console.error('Getting prices failed!', error);
+    }
 
   }
 
@@ -61,6 +67,7 @@ export class PricesService {
 
   startInterval(): void {
 
+    this.stopInterval();
     this.setPrices();
     this.interval = setInterval(() => {
       this.setPrices();

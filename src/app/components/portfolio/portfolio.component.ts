@@ -10,6 +10,7 @@ import { Portfolio } from '@models/portfolio.model';
 import { PortfolioStore } from '@stores/portfolio.store';
 import { Price } from '@models/price.model';
 import { PricesStore } from '@stores/prices.store';
+import { OptionsService } from '@services/options.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -17,6 +18,8 @@ import { PricesStore } from '@stores/prices.store';
   styleUrls: ['./portfolio.component.scss']
 })
 export class PortfolioComponent implements OnInit {
+
+  masked = false;
 
   portfolios: Portfolio[];
   prices: { [symbol: string]: Price };
@@ -32,11 +35,17 @@ export class PortfolioComponent implements OnInit {
   };
 
   constructor(
+    private optionsService: OptionsService,
     private portfolioStore: PortfolioStore,
     private pricesStore: PricesStore
   ) { }
 
   ngOnInit(): void {
+
+    this.masked = this.optionsService.getOptions().masked;
+    this.optionsService.masked.subscribe(data => {
+      this.masked = data;
+    })
 
     this.portfolioStore.portfolioHasAssets$.subscribe(data => {
       let first = !this.portfolios;
