@@ -54,7 +54,8 @@ export class TransactionService {
 
   createTransaction(transaction: Transaction): void {
 
-    const transactions = this.storageService.get(EStorage.TRANSACTIONS);
+    let transactions = this.storageService.get(EStorage.TRANSACTIONS);
+    if (!transactions) transactions = [];
     transactions.push(transaction);
     this.storageService.set(EStorage.TRANSACTIONS, transactions);
     this.generatePortfolioFromTransactions();
