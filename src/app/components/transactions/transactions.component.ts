@@ -4,6 +4,7 @@ import { CoinsStore } from '@stores/coins.store';
 import { TransactionService } from '@services/transaction.service';
 import { Transaction } from '@models/transaction.model';
 import { ETransactionType } from '@enums/transaction-type.enum';
+import { CoinGeckoService } from '@services/coingecko.service';
 
 @Component({
   selector: 'app-transactions',
@@ -24,11 +25,14 @@ export class TransactionsComponent implements OnInit {
     price: '',
   };
 
+  placeholderPrice = 'Price';
+
   ETransactionType = ETransactionType;
 
   constructor(
     private coinStore: CoinsStore,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private coinGeckoService: CoinGeckoService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,22 @@ export class TransactionsComponent implements OnInit {
     this.coinStore.coins$.subscribe(coins => {
       this.coins = coins;
     });
+
+  }
+
+  async selectCoin(event: any): Promise<void> {
+    const coinId = event.target.value;
+    if (!coinId) return;
+
+    try {
+      const res = await this.coinGeckoService.getPrices([coinId]);
+
+      if (res && res[coinId]){
+        this.placeholderPrice = res[coinId].usd.toString()
+        this.formValues.price = this.placeholderPrice;
+      }
+
+    } catch (error) { }
 
   }
 

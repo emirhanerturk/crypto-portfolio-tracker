@@ -13,9 +13,9 @@
     </div>
 </div>
 
-<form (ngSubmit)="createTransaction()" class="transaction-create" [class.d-none]="!openedTransationCreate">
+<form (ngSubmit)="createTransaction()" class="transaction-create" *ngIf="openedTransationCreate">
 
-    <select *ngIf="coins" [(ngModel)]="formValues.coinId" name="coinId" class="form-control">
+    <select *ngIf="coins" [(ngModel)]="formValues.coinId" name="coinId" class="form-control" (change)="selectCoin($event)">
         <option value="">Select coin...</option>
         <option *ngFor="let coin of coins" [value]="coin.id">{{ coin.name }}</option>
     </select>
@@ -26,7 +26,7 @@
     </select>
 
     <input type="text" [(ngModel)]="formValues.amount" name="amount" class="form-control" placeholder="Amount">
-    <input type="text" [(ngModel)]="formValues.price" name="price" class="form-control" placeholder="Price">
+    <input type="text" [(ngModel)]="formValues.price" name="price" class="form-control" [attr.placeholder]="placeholderPrice">
     <button type="submit" class="btn">Add</button>
 </form>
 
