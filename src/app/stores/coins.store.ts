@@ -17,6 +17,11 @@ export class CoinsStore {
     return this.store.getValue();
   }
 
+  searchCoins(key: string): Coin[] {
+    const coins = this.store.getValue();
+    return coins.filter(c => c.symbol.toString().toLowerCase().includes(key) || c.name.toString().toLowerCase().includes(key))
+  }
+
   getCoinBySymbol(symbol: string): Coin {
     return this.store.getValue().find(s => s.symbol === symbol);
   }

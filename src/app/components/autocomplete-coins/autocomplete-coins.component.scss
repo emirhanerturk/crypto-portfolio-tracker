@@ -1,0 +1,44 @@
+@import 'variables';
+
+.autocomplete-input {
+    position: relative;
+    cursor: pointer;
+    font-family: $font-alata;
+
+    .form-control-text {
+        cursor: pointer;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        z-index: 100;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 190px;
+        padding: 0 15px;
+        border-radius: 6px;
+        border: 1px solid #4c4e61;
+        background-color: #2a2d4a;
+        font-family: $font-alata;
+        user-select: none;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        li {
+            font-size: 12px;
+            line-height: 18px;
+            padding: 15px 0;
+            color: #a2a2a5;
+            border-bottom: 1px solid #3b3651;
+
+            &.selected {
+                color: #f3f3f5;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+}

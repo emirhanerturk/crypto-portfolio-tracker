@@ -117,6 +117,27 @@ a, a:hover {
     }
 }
 
+.form-control-with {
+    position: relative;
+    border-radius: 6px;
+
+    .form-control {
+        padding-right: 36px;
+    }
+
+    .form-control-icon, .form-control-text {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+}
+
 .scrollbar {
 
     &::-webkit-scrollbar {

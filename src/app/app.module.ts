@@ -12,6 +12,8 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { CoinPipe } from './pipes/coin.pipe';
+import { AutocompleteCoinsComponent } from './components/autocomplete-coins/autocomplete-coins.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { CoinPipe } from './pipes/coin.pipe';
     SummaryComponent,
     TransactionsComponent,
     CoinPipe,
+    AutocompleteCoinsComponent,
+    ClickOutsideDirective,
   ],
   imports: [
     BrowserModule,

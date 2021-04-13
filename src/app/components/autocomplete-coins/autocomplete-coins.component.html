@@ -1,0 +1,11 @@
+<div class="autocomplete-input form-control-with" [class.opened]="opened" (click)="toggle()" appClickOutside (clickOutside)="toggle(true)">
+    <input [ngModel]="model" (ngModelChange)="search($event)" type="text" class="form-control" autocomplete="new-search" [placeholder]="placeholder" [value]="selected ? (selected.symbol.toUpperCase() + ' - ' + selected.name) : ''">
+    <span class="form-control-text" *ngIf="selected" (click)="clear()">
+        X
+    </span>
+    <ul class="dropdown-list scrollbar" [class.d-none]="!opened || !list.length">
+        <li *ngFor="let item of list" [class.selected]="selected?.id === item.id" (click)="select(item)">
+            {{ item.symbol.toUpperCase() }} - {{ item.name }}
+        </li>
+    </ul>
+</div>

@@ -15,7 +15,7 @@
 .transaction-create {
     width: 100%;
 
-    .form-control {
+    ::ng-deep .form-control {
         margin-bottom: 4px;
     }
 

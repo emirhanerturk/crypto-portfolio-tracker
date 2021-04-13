@@ -25,7 +25,7 @@ export class PricesService {
   async setPrices() {
 
     const coinIds = this.portfolioStore.getCoinIdsByPortfolio();
-    if (!coinIds && !coinIds.length) return;
+    if (!coinIds || !coinIds.length) return;
 
     try {
 
